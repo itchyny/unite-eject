@@ -2,7 +2,7 @@
 " Filename: plugin/unite-eject.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/10/31 01:09:49.
+" Last Change: 2014/03/16 00:02:30.
 " =============================================================================
 
 if exists('g:loaded_unite_eject')
@@ -28,9 +28,7 @@ function! s:unite_eject.func(candidate)
   endtry
 endfunction
 
-if exists('*unite#custom_action')
-  call unite#custom_action('file', 'eject', s:unite_eject)
-endif
+call unite#custom_action('file', 'eject', s:unite_eject)
 
 let g:unite_eject = s:unite_eject
 
