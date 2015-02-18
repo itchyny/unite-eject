@@ -2,10 +2,10 @@
 " Filename: plugin/unite-eject.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2014/12/14 00:54:19.
+" Last Change: 2015/02/15 09:11:25.
 " =============================================================================
 
-if exists('g:loaded_unite_eject')
+if exists('g:loaded_unite_eject') || v:version < 703
   finish
 endif
 let g:loaded_unite_eject = 1
