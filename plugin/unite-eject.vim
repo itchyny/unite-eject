@@ -2,7 +2,7 @@
 " Filename: plugin/unite-eject.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2015/02/15 09:11:25.
+" Last Change: 2018/12/09 17:36:22.
 " =============================================================================
 
 if exists('g:loaded_unite_eject') || v:version < 703
@@ -19,14 +19,12 @@ let s:unite_eject = {
       \ }
 
 function! s:unite_eject.func(candidate)
-  try
-    let cmd = executable('eject') ? 'eject' : executable('diskutil') ? 'diskutil umount' : ''
-    if strlen(cmd)
-      let c = 'sudo ' . cmd . ' "' . a:candidate.action__path . '"'
-      exe 'VimShellInteractive --split="15split" ' . c
-    endif
-  catch
-  endtry
+  let cmd = executable('eject') ? 'eject' : executable('diskutil') ? 'diskutil umount' : ''
+  if cmd ==# ''
+    echoerr 'eject or diskutil required'
+  else
+    call term_start([&shell, &shellcmdflag, 'sudo ' . cmd . ' "' . a:candidate.action__path . '"'])
+  endif
 endfunction
 
 call unite#custom_action('file', 'eject', s:unite_eject)
